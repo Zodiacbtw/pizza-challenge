@@ -1,0 +1,57 @@
+main {
+    max-width: 600px;
+}
+
+
+#title {
+    display: flex;
+}
+
+.upper {
+    display: flex;
+    align-items: center;
+}
+
+#price {
+    margin-right: 22.5rem;
+}
+
+#score {
+    margin-right: 5rem;
+    color: #5F5F5F;
+}
+
+#comment-count {
+    color: #5F5F5F;
+}
+
+#description {
+    text-align: left;
+    color: #5F5F5F;
+}
+
+#selection-section {
+    display: flex;
+    gap: 12rem;
+}
+
+#size div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#size div label {
+    color: #5F5F5F;
+    margin-bottom: 1rem;
+}
+
+#dough h2 {
+    text-align: left;
+}
+
+select {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 2px;
+}
