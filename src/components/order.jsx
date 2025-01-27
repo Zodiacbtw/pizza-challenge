@@ -21,6 +21,35 @@ export default function Order() {
         setSelectedDough(event.target.value);
     }
 
+    const extraIngredients = [
+            { id: 1, label: 'Pepperoni' },
+            { id: 2, label: 'Sosis' },
+            { id: 3, label: 'Kanada Jambonu' },
+            { id: 4, label: 'Tavuk Izgara' },
+            { id: 5, label: 'Soğan' },
+            { id: 6, label: 'Domates' },
+            { id: 7, label: 'Mısır' },
+            { id: 8, label: 'Sucuk' },
+            { id: 9, label: 'Jalepeno' },
+            { id: 10, label: 'Sarımsak' },
+            { id: 11, label: 'Biber' },
+            { id: 12, label: 'Salam' },
+            { id: 13, label: 'Ananas' },
+            { id: 14, label: 'Kabak' }
+    ]
+
+    const [checkedItems, setCheckedItems] = useState([]);
+
+    const handleCheckboxChange = (id) => {
+        setCheckedItems((prevCheckedItems) => {
+            if (prevCheckedItems.includes(id)) {
+                return prevCheckedItems.filter(item => item !== id);
+            } else {
+                return [...prevCheckedItems, id];
+            }
+        });
+    };
+
     return (
         <>
             <main>
@@ -66,6 +95,23 @@ export default function Order() {
                                 ))}
                             </select>
                         </label>
+                    </div>
+                </div>
+                <div id='extra'>
+                    <h2>Ek Malzemeler</h2>
+                    <p>En fazla 10 malzeme seçebilirsiniz. 5₺</p>
+                    <div className='checkbox-container'>
+                        {extraIngredients.map(ingredient => (
+                            <label className='container' key={ingredient.id}>
+                                <input 
+                                    type="checkbox"
+                                    checked={checkedItems.includes(ingredient.id)}
+                                    onChange={() => handleCheckboxChange(ingredient.id)} 
+                                />
+                                {ingredient.label}
+                                <span className='checkmark'></span>
+                            </label>
+                    ))}
                     </div>
                 </div>
             </main>
