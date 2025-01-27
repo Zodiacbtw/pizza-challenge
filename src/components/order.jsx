@@ -41,6 +41,9 @@ export default function Order() {
     const [checkedItems, setCheckedItems] = useState([]);
 
     const handleCheckboxChange = (id) => {
+        if (checkedItems.length >= 10 && !checkedItems.includes(id)) {
+            return;
+        }
         setCheckedItems((prevCheckedItems) => {
             if (prevCheckedItems.includes(id)) {
                 return prevCheckedItems.filter(item => item !== id);
@@ -48,6 +51,15 @@ export default function Order() {
                 return [...prevCheckedItems, id];
             }
         });
+    };
+
+    const [counter, setCounter] = useState(1);
+
+    const increaseCounter = () => setCounter(value + 1);
+    const decreaseCounter = () => {
+        if (counter > 1) {
+            setCounter(counter - 1);
+        }
     };
 
     return (
@@ -67,7 +79,7 @@ export default function Order() {
                 </p>
                 <div id='selection-section'>
                     <div id='size'>
-                        <h2>Boyut Seç</h2>
+                        <h3>Boyut Seç</h3>
                         {sizeOptions.map((size) => (
                             <div key={size}>
                                 <label htmlFor={size}>
@@ -84,7 +96,7 @@ export default function Order() {
                         ))}
                     </div>
                     <div id='dough'>
-                        <h2>Hamur Seç</h2>
+                        <h3>Hamur Seç</h3>
                         <label htmlFor='thickness'>
                             <select id='thickness' value={selectedDough} onChange={handleDoughChange}>
                                 <option id='placeholder' value="" disabled hidden >
@@ -98,7 +110,7 @@ export default function Order() {
                     </div>
                 </div>
                 <div id='extra'>
-                    <h2>Ek Malzemeler</h2>
+                    <h3>Ek Malzemeler</h3>
                     <p>En fazla 10 malzeme seçebilirsiniz. 5₺</p>
                     <div className='checkbox-container'>
                         {extraIngredients.map(ingredient => (
@@ -112,6 +124,33 @@ export default function Order() {
                                 <span className='checkmark'></span>
                             </label>
                     ))}
+                    </div>
+                </div>
+                <div id='note'>
+                    <h3>Sipariş Notu</h3>
+                    <input 
+                        type="text"
+                        placeholder='Siparişinize eklemek istediğiniz bir not var mı?' />
+                </div>
+                <hr />
+                <div id='bottom'>
+                    <div id='counter'>
+                        <button
+                            className='btn'
+                            onClick={decreaseCounter}>
+                                -
+                        </button>
+                        <span id='counter-value'>{counter}</span>
+                        <button
+                            className='btn'
+                            onClick={increaseCounter}>
+                                +
+                        </button>
+                    </div>
+                    <div id='buyout'>
+                        <h3>Sipariş Toplamı</h3>
+                        <span>Seçimler</span>
+                        <span>{}</span>
                     </div>
                 </div>
             </main>

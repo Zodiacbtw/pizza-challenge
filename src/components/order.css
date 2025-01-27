@@ -2,6 +2,11 @@ main {
     max-width: 600px;
 }
 
+hr {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+
 
 #title {
     display: flex;
@@ -33,6 +38,8 @@ main {
 #selection-section {
     display: flex;
     gap: 12rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 #size div {
@@ -46,7 +53,7 @@ main {
     margin-bottom: 1rem;
 }
 
-#dough h2 {
+#dough h3 {
     text-align: left;
 }
 
@@ -56,8 +63,12 @@ select {
     padding: 2px;
 }
 
-#extra h2, #extra p {
+#extra h3, #extra p {
     text-align: left;
+}
+
+#extra p {
+    margin-bottom: 5rem;
 }
 
 .checkbox-container {
@@ -72,16 +83,15 @@ select {
     padding-left: 35px;
     margin-bottom: 12px;
     cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
     width: 20%;
     font-size: 14px;
     text-align: left;
     color: #5F5F5F;
     font-weight: bold;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .container input {
@@ -131,3 +141,50 @@ select {
     transform: rotate(45deg);
 }
 
+#bottom {
+    display: flex;
+}
+
+#counter {
+    width: 30%;
+}
+
+#note {
+    text-align: left;
+    margin-top: 5rem;
+}
+
+#note input {
+    width: 100%;
+    padding: 18px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #5F5F5F;
+}
+
+.btn {
+    height: 24px;
+    width: 24px;
+    padding: 10px, 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #FDC913;
+  }
+
+#counter-value {
+    border: 1px solid #ccc;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#buyout {
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#buyout h3 {
+    font-weight: bold;
+}
