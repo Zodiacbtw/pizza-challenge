@@ -55,29 +55,44 @@ export default function Order() {
 
     const [counter, setCounter] = useState(1);
 
-    const increaseCounter = () => setCounter(value + 1);
+    const increaseCounter = () => setCounter(counter + 1);
     const decreaseCounter = () => {
         if (counter > 1) {
             setCounter(counter - 1);
         }
     };
 
+    const basePrice = 85.50;
+    const extraIngredientPrice = 5;
+
+    const extraCost = checkedItems.length * extraIngredientPrice;
+    const totalPrice = (basePrice + extraCost) * counter;
+
     return (
         <>
-            <main>
-                <h2 id='title'>Position Absolute Acı Pizza</h2>
-                <div className='upper'>
-                    <h2 id='price'>85.50₺</h2>
-                    <span id='score'>4.9</span>
-                    <span id='comment-count'>(200)</span>
+            <header>
+                <img src="images/iteration-1-images/logo.svg" alt="logo" />
+                <div id='header-container'>
+                    <span id='main-page'>Anasayfa</span>
+                    <span id='sub-page'>- Sipariş Oluştur</span>
                 </div>
-                <p id='description'>
-                    Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates,
-                    peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir
-                    fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan
-                    İtalyan kökenli lezzetli bir yemektir. Küçük bir pizzaya bazen pizzetta denir.
-                </p>
-                <div id='selection-section'>
+            </header>
+            <div id='wrapper'>
+                <main>
+                    <h2 id='title'>Position Absolute Acı Pizza</h2>
+                    <div className='upper'>
+                        <h2 id='price'>{basePrice.toFixed(2)}₺</h2>
+                        <span id='score'>4.9</span>
+                        <span id='comment-count'>(200)</span>
+                    </div>
+                    <p id='description'>
+                        Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates,
+                        peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir
+                        fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan
+                        İtalyan kökenli lezzetli bir yemektir. Küçük bir pizzaya bazen pizzetta denir.
+                    </p>
+                </main>
+                <section id='selection'>
                     <div id='size'>
                         <h3>Boyut Seç</h3>
                         {sizeOptions.map((size) => (
@@ -108,8 +123,8 @@ export default function Order() {
                             </select>
                         </label>
                     </div>
-                </div>
-                <div id='extra'>
+                </section>
+                <section id='extra'>
                     <h3>Ek Malzemeler</h3>
                     <p>En fazla 10 malzeme seçebilirsiniz. 5₺</p>
                     <div className='checkbox-container'>
@@ -125,38 +140,46 @@ export default function Order() {
                             </label>
                     ))}
                     </div>
-                </div>
-                <div id='note'>
+                </section>
+                <section id='note'>
                     <h3>Sipariş Notu</h3>
                     <input 
                         type="text"
                         placeholder='Siparişinize eklemek istediğiniz bir not var mı?' />
-                </div>
+                </section>
                 <hr />
-                <div id='bottom'>
+                <footer>
                     <div id='counter'>
                         <button
                             className='btn'
                             onClick={decreaseCounter}>
-                                -
+                               -
                         </button>
-                        <span id='counter-value'>{counter}</span>
+                        <div id='counter-value'>{counter}</div>
                         <button
                             className='btn'
                             onClick={increaseCounter}>
                                 +
                         </button>
                     </div>
-                    <div id='buyout'>
-                        <h3>Sipariş Toplamı</h3>
-                        <span>Seçimler</span>
-                        <span>{}</span>
-                    </div>
-                </div>
-            </main>
-
-            
-
+                    <div id='footer-couple'>
+                        <div id='buyout'>
+                            <h3 id='left-title'>Sipariş Toplamı</h3>
+                            <div id='left-col'>
+                                <span style={{ visibility: checkedItems.length > 0 ? "visible" : "hidden" }}>Seçimler</span>
+                                <span style={{ visibility: checkedItems.length > 0 ? "visible" : "hidden" }}>{extraCost.toFixed(2)}₺</span>
+                            </div>
+                            <div id='right-col'>
+                                <span>Toplam</span>
+                                <span>{totalPrice.toFixed(2)}₺</span>
+                            </div>
+                        </div>
+                        <button id='complete-btn'>
+                            <h3>SİPARİŞ VER</h3>
+                        </button>
+                    </div>    
+                </footer>
+            </div>
         </>
     )
 }

@@ -1,5 +1,34 @@
-main {
+header {
+    background-color: #CE2829;
+    width: 100vw;
+    position: relative;
+    padding-top: 5rem;
+    padding-bottom: 1rem;
+    left: 0;
+    right: 0;
+}
+
+#header-container {
     max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+    display: flex;
+    margin-top: 5rem;
+}
+
+#main-page {
+    color: white;
+}
+
+#sub-page {
+    font-weight: bold;
+    color: white;
+    margin-left: 4px;
+}
+
+#wrapper {
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 hr {
@@ -35,7 +64,7 @@ hr {
     color: #5F5F5F;
 }
 
-#selection-section {
+#selection {
     display: flex;
     gap: 12rem;
     margin-top: 2rem;
@@ -141,12 +170,16 @@ select {
     transform: rotate(45deg);
 }
 
-#bottom {
+footer {
     display: flex;
+    margin-bottom: 2rem;
 }
 
 #counter {
-    width: 30%;
+    width: 35%;
+    height: 50px;
+    display: flex;
+    margin-right: 10px;
 }
 
 #note {
@@ -164,27 +197,70 @@ select {
 }
 
 .btn {
-    height: 24px;
-    width: 24px;
-    padding: 10px, 20px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
     background-color: #FDC913;
+    width: 35%;
   }
 
 #counter-value {
     border: 1px solid #ccc;
     font-size: 20px;
     font-weight: bold;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#footer-couple {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 65%;
 }
 
 #buyout {
-    width: 70%;
     border: 1px solid #ccc;
     border-radius: 5px;
+    padding: 25px 40px;
 }
 
 #buyout h3 {
     font-weight: bold;
+}
+
+#footer-title {
+    text-align: left;
+}
+
+#left-title {
+    text-align: left;
+}
+
+#left-col {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #5F5F5F;
+    font-weight: bold;
+}
+
+#right-col {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #CE2829;
+    font-weight: bold;
+}
+
+#complete-btn {
+    background-color: #FDC913;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
