@@ -36,6 +36,13 @@ hr {
     margin-bottom: 2.5rem;
 }
 
+#size h3::after,
+#dough h3::after {
+    content: " *";
+    color: red;
+    font-weight: bold;
+}
+
 
 #title {
     display: flex;

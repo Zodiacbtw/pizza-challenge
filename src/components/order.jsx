@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import './order.css';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Order() {
 
@@ -41,13 +44,14 @@ export default function Order() {
     const [checkedItems, setCheckedItems] = useState([]);
 
     const handleCheckboxChange = (id) => {
-        if (checkedItems.length >= 10 && !checkedItems.includes(id)) {
-            return;
-        }
         setCheckedItems((prevCheckedItems) => {
             if (prevCheckedItems.includes(id)) {
                 return prevCheckedItems.filter(item => item !== id);
             } else {
+                if (prevCheckedItems.length >= 10) {
+                    toast.error("En fazla 10 adet malzeme seçebilirsiniz!");
+                    return prevCheckedItems;
+                }
                 return [...prevCheckedItems, id];
             }
         });
@@ -64,12 +68,51 @@ export default function Order() {
 
     const basePrice = 85.50;
     const extraIngredientPrice = 5;
-
     const extraCost = checkedItems.length * extraIngredientPrice;
     const totalPrice = (basePrice + extraCost) * counter;
 
+    const isFormValid = selectedSize && selectedDough && checkedItems.length >= 4 && checkedItems.length <= 10;
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (!isFormValid) {
+            toast.error("Lütfen sipariş formunu eksiksiz doldurunuz.");
+            return;
+        }
+
+        setIsSubmitting(true);
+
+        const selectedLabels = checkedItems.map(id => {
+            const selectedIngredient = extraIngredients.find(ingredient => ingredient.id === id);
+            return selectedIngredient ? selectedIngredient.label : null;
+        }).filter(label => label != null);
+
+        const orderData = {
+            size: selectedSize,
+            dough: selectedDough,
+            ingredients: selectedLabels,
+            quantity: counter,
+            totalPrice: totalPrice.toFixed(2)
+        };
+
+        try {
+            const response = await axios.post('https://reqres.in/api/pizza', orderData);
+            console.log("Sipariş Özeti:", response.data);
+            toast.success("Sipariş başarıyla gönderildi!");
+        } catch (error) {
+            console.error("Sipariş gönderilemedi:", error);
+            toast.error("Sipariş gönderilirken bir hata oluştu.");
+        } finally {
+            setIsSubmitting(false);
+        }
+    }
+
     return (
         <>
+            <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+
             <header>
                 <img src="images/iteration-1-images/logo.svg" alt="logo" />
                 <div id='header-container'>
@@ -126,7 +169,7 @@ export default function Order() {
                 </section>
                 <section id='extra'>
                     <h3>Ek Malzemeler</h3>
-                    <p>En fazla 10 malzeme seçebilirsiniz. 5₺</p>
+                    <p>En az 4, en fazla 10 adet malzeme seçebilirsiniz. (5₺)</p>
                     <div className='checkbox-container'>
                         {extraIngredients.map(ingredient => (
                             <label className='container' key={ingredient.id}>
@@ -174,8 +217,8 @@ export default function Order() {
                                 <span>{totalPrice.toFixed(2)}₺</span>
                             </div>
                         </div>
-                        <button id='complete-btn'>
-                            <h3>SİPARİŞ VER</h3>
+                        <button id='complete-btn' onClick={handleSubmit} disabled={!isFormValid || isSubmitting}>
+                            <h3>{isSubmitting ? "Gönderiliyor..." : "SİPARİŞ VER"}</h3>
                         </button>
                     </div>    
                 </footer>

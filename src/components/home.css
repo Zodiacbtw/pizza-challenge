@@ -3,7 +3,7 @@
     height: 100vh;
     background-image: url('images/iteration-1-images/home-banner.png');
     background-position: center;
-    background-size: contain;
+    background-size:cover;
 }
 
 #home-wrapper {
