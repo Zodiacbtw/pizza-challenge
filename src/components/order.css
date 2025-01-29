@@ -37,7 +37,8 @@ hr {
 }
 
 #size h3::after,
-#dough h3::after {
+#dough h3::after,
+#username h3::after {
     content: " *";
     color: red;
     font-weight: bold;
@@ -192,6 +193,22 @@ footer {
 #note {
     text-align: left;
     margin-top: 5rem;
+}
+
+#username {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 4rem;
+}
+
+#name {
+    width: 170px;
+    height: 20px;
+}
+
+#name-label {
+    font-weight: bold;
 }
 
 #note input {

@@ -71,8 +71,11 @@ export default function Order() {
     const extraCost = checkedItems.length * extraIngredientPrice;
     const totalPrice = (basePrice + extraCost) * counter;
 
-    const isFormValid = selectedSize && selectedDough && checkedItems.length >= 4 && checkedItems.length <= 10;
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [name, setName] = useState('')
+
+    const isFormValid = selectedSize && selectedDough && checkedItems.length >= 4 && checkedItems.length <= 10 && name.length >= 3;
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -90,6 +93,7 @@ export default function Order() {
         }).filter(label => label != null);
 
         const orderData = {
+            name: name,
             size: selectedSize,
             dough: selectedDough,
             ingredients: selectedLabels,
@@ -183,6 +187,15 @@ export default function Order() {
                             </label>
                     ))}
                     </div>
+                </section>
+                <section id='username'>
+                    <h3>İsim Soyisim</h3>
+                    <input 
+                        id='name' 
+                        type="text" 
+                        value={name} 
+                        onChange={(e) => setName(e.target.value)}
+                        />
                 </section>
                 <section id='note'>
                     <h3>Sipariş Notu</h3>
