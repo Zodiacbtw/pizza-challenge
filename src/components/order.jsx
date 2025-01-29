@@ -3,8 +3,13 @@ import './order.css';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-export default function Order() {
+function Order() {
+    
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const history = useHistory();
 
     const valueToText = (item) => {
         return item.charAt(0).toUpperCase() + item.slice(1);
@@ -71,7 +76,6 @@ export default function Order() {
     const extraCost = checkedItems.length * extraIngredientPrice;
     const totalPrice = (basePrice + extraCost) * counter;
 
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [name, setName] = useState('')
 
     const isFormValid = selectedSize && selectedDough && checkedItems.length >= 4 && checkedItems.length <= 10 && name.length >= 3;
@@ -104,7 +108,12 @@ export default function Order() {
         try {
             const response = await axios.post('https://reqres.in/api/pizza', orderData);
             console.log("Sipariş Özeti:", response.data);
+
             toast.success("Sipariş başarıyla gönderildi!");
+
+            setTimeout(() => {
+                history.push('/success');
+            }, 3500)
         } catch (error) {
             console.error("Sipariş gönderilemedi:", error);
             toast.error("Sipariş gönderilirken bir hata oluştu.");
@@ -239,3 +248,5 @@ export default function Order() {
         </>
     )
 }
+
+export default withRouter(Order);
